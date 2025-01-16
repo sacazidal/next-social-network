@@ -1,4 +1,4 @@
-import pool from "@/app/lib/db";
+import { supabase } from "@/app/lib/supabaseClient";
 import bcrypt from "bcrypt";
 
 export async function POST(request) {
@@ -8,50 +8,45 @@ export async function POST(request) {
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const query = `
-    insert into users (email, username, password_hash, first_name, last_name)
-    values ($1, $2, $3, $4, $5)
-    returning id, username, email;`;
+    const { data: newUser, error: insertUser } =
+      await supabase
+        .from("users")
+        .insert([
+          {
+            email,
+            username,
+            password_hash: hashedPassword,
+            first_name: firstName,
+            last_name: lastName,
+          },
+        ])
+        .select();
 
-    const values = [
-      email,
-      username,
-      hashedPassword,
-      firstName,
-      lastName,
-    ];
-
-    const result = await pool.query(query, values);
-
-    if (result.rows.length > 0) {
-      return new Response(
-        JSON.stringify({ message: "Успешная регистрация" }),
-        { status: 200 },
-      );
-    } else {
-      return new Response(
-        JSON.stringify({
-          message: "Ошибка при регистрации",
-        }),
-        { status: 400 },
-      );
-    }
-  } catch (error) {
-    console.error(error);
-
-    if (error.code === "23505") {
-      return new Response(
-        JSON.stringify({
-          message:
-            "Пользователь с таким email или логином уже существует",
-        }),
-        { status: 409 },
-      );
+    if (insertUser) {
+      if (insertUser.code === "23505") {
+        return new Response(
+          JSON.stringify({
+            message:
+              "Пользователь с таким email или логином уже существует",
+          }),
+          { status: 409 },
+        );
+      }
+      throw insertUser;
     }
 
     return new Response(
       JSON.stringify({
-        message: "Произошла ошибка при регистрации.",
+        message: "Успешная регистрация",
+        user: newUser[0],
+      }),
+      { status: 200 },
+    );
+  } catch (error) {
+    console.error(error);
+    return new Response(
+      JSON.stringify({
+        message: "Произошла ошибка при регистрации",
       }),
       { status: 500 },
     );
