@@ -73,10 +73,6 @@ const page = () => {
     }
   };
 
-  const handleVerifyCode = async (code) => {
-    router.push("/signin");
-  };
-
   return (
     <FormWrapper>
       <h1 className="text-3xl font-semibold">
@@ -164,7 +160,6 @@ const page = () => {
       <EmailVerificationModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(dalse)}
-        onSubmit={handleVerifyCode}
       />
     </FormWrapper>
   );

@@ -18,27 +18,16 @@ const EmailVerificationModal = ({
           Подтверждение email
         </h2>
         <p className="mb-4">
-          Введите код, который мы отправили на вашу почту.
+          Мы отправили ссылку для подтверждения на вашу
+          почту. Пожалуйста, проверьте ваш email и перейдите
+          по ссылке, чтобы завершить регистрацию.
         </p>
-        <input
-          type="text"
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
-          className="border p-2 w-full mb-4"
-          placeholder="Введите код"
-        />
         <div className="flex justify-end">
           <button
             onClick={onClose}
-            className="bg-gray-500 text-white px-4 py-2 rounded mr-2"
-          >
-            Отмена
-          </button>
-          <button
-            onClick={() => onSubmit(code)}
             className="bg-blue-500 text-white px-4 py-2 rounded"
           >
-            Подтвердить
+            ОК
           </button>
         </div>
       </div>
