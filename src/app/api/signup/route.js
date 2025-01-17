@@ -31,7 +31,7 @@ export async function POST(request) {
       });
 
     if (authError) {
-      return Response(
+      return new Response(
         JSON.stringify({
           message: authError.message,
         }),
