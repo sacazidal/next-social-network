@@ -86,7 +86,7 @@ const page = () => {
         />
         <BtnForm title={"Войти"} />
       </form>
-      <div className="text-center mt-3 text-xs mb-4">
+      <div className="text-center mt-3 text-[10px] md:text-xs mb-4">
         Продолжая, вы соглашаетесь с{" "}
         <Link
           href={"#"}
@@ -103,7 +103,7 @@ const page = () => {
         </Link>
         .
       </div>
-      <div className="flex w-full text-xs justify-center">
+      <div className="flex w-full text-[10px] md:text-xs justify-center">
         У вас нет учетной записи?
         <Link
           href={"/signup"}

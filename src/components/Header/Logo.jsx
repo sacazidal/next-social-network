@@ -16,7 +16,7 @@ const Logo = () => {
         height={sizeImage}
         className="bg-white rounded-2xl group-hover:rotate-12 transition-transform duration-300"
       />
-      <h1 className="text-xl font-bold group-hover:text-blue-500 transition-colors duration-300">
+      <h1 className="text-lg md:text-xl font-bold group-hover:text-blue-500 transition-colors duration-300">
         Next Social Network
       </h1>
     </Link>

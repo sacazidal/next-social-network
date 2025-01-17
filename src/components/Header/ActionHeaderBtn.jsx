@@ -10,7 +10,7 @@ const ActionHeaderBtn = ({
     return (
       <button
         onClick={onClick}
-        className={`flex items-center justify-center py-2 px-4 rounded-xl border-2 border-white font-medium text-base transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg ${classname}`}
+        className={`flex items-center justify-center py-1 px-2 md:py-2 md:px-4 rounded-xl border-2 border-white font-medium text-base transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg ${classname}`}
       >
         <Link href={href}>{title}</Link>
       </button>
@@ -20,7 +20,7 @@ const ActionHeaderBtn = ({
   return (
     <button
       onClick={onClick}
-      className={`flex items-center justify-center py-2 px-4 rounded-xl border-2 border-white font-medium text-base transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg ${classname}`}
+      className={`flex items-center justify-center py-1 px-2 md:py-2 md:px-4 rounded-xl border-2 border-white font-medium text-base transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg ${classname}`}
     >
       <Link href={href}>{title}</Link>
     </button>

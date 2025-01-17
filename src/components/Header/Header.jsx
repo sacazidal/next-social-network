@@ -8,8 +8,8 @@ const Header = () => {
   const { isLoggedIn, logout } = useAuth();
 
   return (
-    <header className="py-4 px-4 md:px-0 container mx-auto h-[76px]">
-      <div className="flex gap-x-5 items-center justify-between">
+    <header className="py-4 px-4 md:px-0 container mx-auto h-[128px] md:h-[76px]">
+      <div className="flex flex-col md:flex-row gap-x-5 gap-y-5 items-center justify-between">
         <Logo />
         <div className="flex items-center gap-x-3">
           {isLoggedIn ? (

@@ -80,7 +80,7 @@ const page = () => {
 
   return (
     <FormWrapper>
-      <h1 className="text-3xl font-semibold">
+      <h1 className="text-xl md:text-3xl font-semibold">
         Регистрация
       </h1>
       {error && (
@@ -88,7 +88,7 @@ const page = () => {
       )}
       <form
         onSubmit={handleSubmit}
-        className="space-y-6 w-full mt-10"
+        className="space-y-6 w-full mt-6 md:mt-10"
       >
         <InputForm
           type={"email"}
@@ -106,7 +106,7 @@ const page = () => {
           onChange={(e) => setUsername(e.target.value)}
           placeholder={"Введите логин"}
         />
-        <div className="flex justify-between gap-x-3 w-full">
+        <div className="flex flex-col md:flex-row gap-y-6 justify-between gap-x-3 w-full">
           <InputForm
             type={"text"}
             id={"firstName"}
@@ -134,7 +134,7 @@ const page = () => {
         />
         <BtnForm title={"Зарегистрироваться"} />
       </form>
-      <div className="text-center mt-3 text-xs mb-4">
+      <div className="text-center mt-3 text-[10px] md:text-xs mb-4">
         Продолжая, вы соглашаетесь с{" "}
         <Link
           href={""}
@@ -151,7 +151,7 @@ const page = () => {
         </Link>
         .
       </div>
-      <div className="flex w-full text-xs justify-center">
+      <div className="flex w-full text-[10px] md:text-xs justify-center">
         Уже есть аккаунт?
         <Link
           href={"/signin"}

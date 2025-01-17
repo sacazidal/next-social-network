@@ -3,7 +3,7 @@ const BtnForm = ({ title }) => {
     <div>
       <button
         type="submit"
-        className="w-full bg-neutral-100 text-black font-medium py-3 px-4 rounded-3xl hover:bg-black border-2 hover:text-white focus:outline-none"
+        className="w-full text-sm md:text-base bg-neutral-100 text-black font-medium py-2 px-3 md:py-3 md:px-4 rounded-3xl hover:bg-black border-2 hover:text-white focus:outline-none"
       >
         {title}
       </button>
