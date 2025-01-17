@@ -6,7 +6,38 @@ export async function POST(request) {
     await request.json();
 
   try {
+    if (password.length >= 6) {
+      return Response(
+        JSON.stringify({
+          message: "Пароль должен быть не менее 6 символов",
+        }),
+        { status: 400 },
+      );
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
+
+    const { data: authData, error: authError } =
+      await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            username,
+            first_name: firstName,
+            last_name: lastName,
+          },
+        },
+      });
+
+    if (authError) {
+      return Response(
+        JSON.stringify({
+          message: authError.message,
+        }),
+        { status: 400 },
+      );
+    }
 
     const { data: newUser, error: insertUser } =
       await supabase
@@ -33,23 +64,6 @@ export async function POST(request) {
         );
       }
       throw insertUser;
-    }
-
-    const { data: authData, error: authError } =
-      await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: {
-            username,
-            first_name: firstName,
-            last_name: lastName,
-          },
-        },
-      });
-
-    if (authError) {
-      throw authError;
     }
 
     return new Response(
