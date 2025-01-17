@@ -6,8 +6,8 @@ export async function POST(request) {
     await request.json();
 
   try {
-    if (password.length >= 6) {
-      return Response(
+    if (password.length <= 6) {
+      return new Response(
         JSON.stringify({
           message: "Пароль должен быть не менее 6 символов",
         }),
@@ -54,7 +54,10 @@ export async function POST(request) {
         .select();
 
     if (insertUser) {
-      if (insertUser.code === "23505") {
+      if (
+        insertUser.message.includes("duplicate key") ||
+        insertUser.message.includes("already exists")
+      ) {
         return new Response(
           JSON.stringify({
             message:
