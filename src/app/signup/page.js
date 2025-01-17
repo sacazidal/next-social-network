@@ -5,6 +5,7 @@ import BtnForm from "@/components/BtnForm";
 import EmailVerificationModal from "@/components/EmailVerificationModal";
 import FormWrapper from "@/components/FormWrapper";
 import InputForm from "@/components/InputForm";
+import Loader from "@/components/Loader";
 import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -18,6 +19,7 @@ const page = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { isLoggedIn } = useAuth();
   const router = useRouter();
@@ -43,6 +45,7 @@ const page = () => {
     }
 
     setError("");
+    setIsLoading(true);
 
     try {
       const response = await fetch("/api/signup", {
@@ -70,6 +73,8 @@ const page = () => {
       setError(
         "При регистрации произошла ошибка. Попробуйте еще раз.",
       );
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -157,9 +162,11 @@ const page = () => {
         </Link>
       </div>
 
+      {isLoading && <Loader />}
+
       <EmailVerificationModal
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(dalse)}
+        onClose={() => setIsModalOpen(false)}
       />
     </FormWrapper>
   );
