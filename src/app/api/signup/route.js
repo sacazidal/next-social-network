@@ -35,9 +35,27 @@ export async function POST(request) {
       throw insertUser;
     }
 
+    const { data: authData, error: authError } =
+      await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            username,
+            first_name: firstName,
+            last_name: lastName,
+          },
+        },
+      });
+
+    if (authError) {
+      throw authError;
+    }
+
     return new Response(
       JSON.stringify({
-        message: "Успешная регистрация",
+        message:
+          "Код подтверждения отправлен на вашу почту",
         user: newUser[0],
       }),
       { status: 200 },

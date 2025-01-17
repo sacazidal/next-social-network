@@ -2,6 +2,7 @@
 "use client";
 
 import BtnForm from "@/components/BtnForm";
+import EmailVerificationModal from "@/components/EmailVerificationModal";
 import FormWrapper from "@/components/FormWrapper";
 import InputForm from "@/components/InputForm";
 import { useAuth } from "@/context/AuthContext";
@@ -16,6 +17,7 @@ const page = () => {
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { isLoggedIn } = useAuth();
   const router = useRouter();
@@ -60,7 +62,7 @@ const page = () => {
       const data = await response.json();
 
       if (response.ok) {
-        router.push("/signin");
+        setIsModalOpen(true);
       } else {
         setError(data.message);
       }
@@ -69,6 +71,10 @@ const page = () => {
         "При регистрации произошла ошибка. Попробуйте еще раз.",
       );
     }
+  };
+
+  const handleVerifyCode = async (code) => {
+    router.push("/signin");
   };
 
   return (
@@ -154,6 +160,12 @@ const page = () => {
           Войти
         </Link>
       </div>
+
+      <EmailVerificationModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(dalse)}
+        onSubmit={handleVerifyCode}
+      />
     </FormWrapper>
   );
 };
