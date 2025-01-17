@@ -6,10 +6,10 @@ export async function POST(request) {
     await request.json();
 
   try {
-    if (password.length <= 6) {
+    if (password.length < 6) {
       return new Response(
         JSON.stringify({
-          message: "Пароль должен быть не менее 6 символов",
+          message: "Пароль должен быть не менее 7 символов",
         }),
         { status: 400 },
       );
